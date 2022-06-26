@@ -1,7 +1,36 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { BaseLayout } from "@components/layout"
+import { fetcher } from "@utils/fetcher";
+const axios = require('axios').default;
 
 export default function Summary() {
+    const router = useRouter();
+
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [currencies, setCurrencies] = useState(null);
+  
+    useEffect(() => {
+        const query = router.query;
+        const amount = query.amount;
+        console.log(query)
+      if (isLoading) {
+            fetcher("/currencies", "GET").then((data) => {
+                console.log(data)
+                if (data) {
+                    console.log(data)
+                    setCurrencies(data)
+                    setIsLoading(false)
+                    setError(null);
+                } else {
+                    setError("There was an error getting the dates");
+                }
+  
+            })
+      }
+    }, [isLoading])
 
     return (
         <>
@@ -53,33 +82,33 @@ export default function Summary() {
                         </div>
                     </div>
                 </div>
-                {/* <select className="w-full h-12 py-3 px-6 rounded-lg shadow-lg bg-slate-100 font-semibold">
+                <select className="w-full h-12 py-3 px-6 rounded-lg shadow-lg bg-slate-100 font-semibold">
                     <option>BTC</option>
                     <option>ETH</option>
                     <option>ADA</option>
-                </select> */}
-                <div className="rounded-lg shadow-lg bg-slate-100 text-center">
+                </select>
+                {/* <div className="rounded-lg shadow-lg bg-slate-100 text-center">
                     <div className="py-3 px-6">TIMER</div>
                     <div className="my-5 flex space-x-2 justify-center">
                         <button
                             type="button"
-                            class="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                            className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                             Pagar con metamask
                         </button>
                     </div>
                     <div className="py-5 text-xs">
-                    <div>
-                     Enviar 0,0034 BTC
-                    </div>
-                    <div className="py-3">
-                    0x71C7656EC7ab88b098defB751B7401B5f6d8976F
-                    </div>
-                    <div>
-                    Etiqueta de destino: 255716461
-                    </div>
+                        <div>
+                            Enviar 0,0034 BTC
+                        </div>
+                        <div className="py-3">
+                            0x71C7656EC7ab88b098defB751B7401B5f6d8976F
+                        </div>
+                        <div>
+                            Etiqueta de destino: 255716461
+                        </div>
                     </div>
 
-                </div>
+                </div> */}
             </div>
         </>
     )

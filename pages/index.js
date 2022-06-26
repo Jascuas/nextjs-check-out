@@ -1,7 +1,20 @@
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Router, { withRouter } from 'next/router'
 
 import { BaseLayout } from "@components/layout"
+import { Button } from "@components/common";
 
 export default function Home() {
+  const [amount, setAmount] = useState();
+  const [concept, setConcept] = useState();
+  function getAmount(value) {
+    setAmount(value)
+  }
+  function getConcept(value) {
+    setConcept(value)
+  }
+
 
   return (
     <>
@@ -11,8 +24,8 @@ export default function Home() {
           <div className="form-group mb-6">
             <label className="form-label inline-block mb-2 text-gray-700 text-sm">Importe a pagar en EUR</label>
             <input
+              onChange={e => getAmount(e.target.value)}
               type="text"
-              pattern="^[0-9]+(\,[0-9][0-9]?)?$"
               className="form-controlblock w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="amount"
               aria-describedby="amountToPay"
@@ -21,16 +34,25 @@ export default function Home() {
           <div className="form-group mb-6">
             <label className="form-label inline-block mb-2 text-gray-700 text-sm">Concepto</label>
             <input
+              onChange={e => getConcept(e.target.value)}
               type="text"
               className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               id="concept"
               placeholder="Compra de XXXXX" />
           </div>
-          <button
-            type="submit"
-            className="px-6 py-2.5 w-full bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
-            Crear pago
-          </button>
+
+
+          <Link href={{
+            pathname: "/summary",
+            query: { "amount": amount, "concept": concept },
+          }} as={"/summary"}>
+            <a 
+            className="text-center block text-white bg-blue-600 hover:bg-blue-700 px-6 py-2.5 w-full border rounded-md font-medium shadow-md">
+                Crear pago
+            </a>
+          </Link>
+
+
         </form>
       </div>
     </>
