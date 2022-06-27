@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import Router, { withRouter } from 'next/router'
 
 import { BaseLayout } from "@components/layout"
-import { Button } from "@components/common";
 
 export default function Home() {
   const [amount, setAmount] = useState();
   const [concept, setConcept] = useState();
+
   function getAmount(value) {
     setAmount(value)
   }
+
   function getConcept(value) {
     setConcept(value)
   }
@@ -41,17 +41,15 @@ export default function Home() {
               placeholder="Compra de XXXXX" />
           </div>
 
-
           <Link href={{
             pathname: "/summary",
             query: { "amount": amount, "concept": concept },
           }} as={"/summary"}>
-            <a 
-            className="text-center block text-white bg-blue-600 hover:bg-blue-700 px-6 py-2.5 w-full border rounded-md font-medium shadow-md">
-                Crear pago
+            <a
+              className="text-center block text-white bg-blue-600 hover:bg-blue-700 px-6 py-2.5 w-full border rounded-md font-medium shadow-md">
+              Crear pago
             </a>
           </Link>
-
 
         </form>
       </div>

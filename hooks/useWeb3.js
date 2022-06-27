@@ -25,7 +25,6 @@ export function useWeb3() {
     }
 
     function handleAccountsChanged(accounts) {
-        console.log(accounts)
         if (accounts.length === 0) {
             setAccount()
         } else if (accounts[0] !== account) {

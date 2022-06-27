@@ -1,7 +1,10 @@
 import '@styles/globals.css'
 import 'tailwindcss/tailwind.css';
+import { ToastContainer } from 'react-toastify'
 
-const Noop = ({children}) => <>{children}</>
+import 'react-toastify/dist/ReactToastify.css'
+
+const Noop = ({ children }) => <>{children}</>
 
 function MyApp({ Component, pageProps }) {
 
@@ -9,6 +12,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Layout>
+      <ToastContainer />
       <Component {...pageProps} />
     </Layout>
   )

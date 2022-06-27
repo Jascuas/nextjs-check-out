@@ -12,7 +12,6 @@ export const fetcher = async (url, method, data) => {
       headers: headers
     })
     .then(res => {
-      console.log(res)
        return res.data}
        )
     .catch(err => console.log(err))
@@ -24,7 +23,6 @@ export const fetcher = async (url, method, data) => {
       headers: headers
     })
     .then(res => {
-      console.log(res)
        return res.data}
        )
     .catch(err => console.log(err.response))
