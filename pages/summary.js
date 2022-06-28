@@ -139,7 +139,7 @@ export default function Summary() {
                     </>
                 }
                 {orderCreated &&
-                    <div className="rounded-lg shadow-lg bg-slate-100 text-center place-self-center">
+                    <div className={`rounded-lg shadow-lg bg-slate-100 text-center ${sent && "place-self-center"}`}>
                         {sent ?
                             <div className="flex space-x-2 justify-center">
                                 <Link href={{ pathname: "/", }}>
